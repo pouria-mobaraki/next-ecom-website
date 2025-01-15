@@ -1,3 +1,4 @@
+import About from "@/components/About";
 import Features from "@/components/Features";
 import ProductsTab from "@/components/products/ProductsTab";
 import { getFetch } from "@/utils/fetch";
@@ -10,6 +11,7 @@ const productsTab = await getFetch('/products/products-tabs')
    <>
    <Features />
    <ProductsTab tabList={productsTab.tabList} tabPanel={productsTab.tabPanel}/>
+   <About />
    </>
   );
 }
