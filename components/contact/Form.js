@@ -13,6 +13,8 @@ export default function Form() {
     useEffect(()=>{
     if(state?.status==='error'){
         toast.error(state.message)
+    }else {
+        toast.success(state.message)
     }
     },[state])
   return (
