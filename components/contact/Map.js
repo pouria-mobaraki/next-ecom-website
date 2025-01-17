@@ -13,7 +13,7 @@ export default function Map() {
         maxZoom: 18,
     }).addTo(map);
     var marker = L.marker([35.700105, 51.400394]).addTo(map)
-        .bindPopup('<b>webprog</b>').openPopup();
+        .bindPopup('<b>Pouria.M</b>').openPopup();
  },[])
   return (
     <div id="contact-map">

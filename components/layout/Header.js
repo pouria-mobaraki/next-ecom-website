@@ -1,12 +1,17 @@
+'use client'
+
 import React from 'react'
 import Image from 'next/image'
 import heroImage from '../../public/images/hero-bg.jpg'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 
 function Header() {
+    const pathName = usePathname()
   return (
     <>
-     <div>
+     <div className={pathName==='/' ? '' :'sub_page'}>
         <div className="hero_area">
             <div className="bg-box">
                 <Image src={heroImage} priority alt=""/>
@@ -15,11 +20,11 @@ function Header() {
             <header className="header_section">
                 <div className="container">
                     <nav className="navbar navbar-expand-lg custom_nav-container">
-                        <a className="navbar-brand" href="index.html">
+                        <Link className="navbar-brand" href='/'>
                             <span>
                                 pouria.M
                             </span>
-                        </a>
+                        </Link>
 
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -29,17 +34,17 @@ function Header() {
 
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav mx-auto">
-                                <li className="nav-item active">
-                                    <a className="nav-link" href="index.html">صفحه اصلی</a>
+                                <li className={pathName==='/'?'nav-item active':'nav-item'}>
+                                    <Link className="nav-link" href='/'>صفحه اصلی</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="menu.html">منو</a>
+                                <li className={pathName==='/menu'?'nav-item active':'nav-item'}>
+                                    <Link className="nav-link" href='/menu'>منو</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="about.html">درباره ما</a>
+                                <li className={pathName==='/about'?'nav-item active':'nav-item'}>
+                                    <Link className="nav-link" href='/about'>درباره ما</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="contact.html">تماس باما</a>
+                                <li className={pathName==='/contact'?'nav-item active':'nav-item'}>
+                                    <Link className="nav-link" href='/contact'>تماس باما</Link>
                                 </li>
                             </ul>
                             <div className="user_option">
@@ -59,7 +64,8 @@ function Header() {
             </header>
             {/* <!-- end header section --> */}
             {/* <!-- slider section --> */}
-            <section className="slider_section">
+
+           {pathName ==='/'&& <section className="slider_section">
                 <div id="customCarousel1" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-inner">
                         <div className="carousel-item active">
@@ -153,7 +159,7 @@ function Header() {
                     </div>
                 </div>
 
-            </section>
+            </section>} 
 
             {/* <!-- end slider section --> */}
         </div>
