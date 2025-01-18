@@ -1,10 +1,11 @@
 import { getFetch } from "@/utils/fetch";
 import Product from "../products/Product";
 import Image from "next/image";
+import Paginate from "./Paginate";
 
-export default async function ProductList() {
+export default async function ProductList({params}) {
 
-    const data = await getFetch('/menu')
+    const data = await getFetch(`/menu?${params}`)
     // console.log(data);
     
   return (
@@ -52,26 +53,8 @@ export default async function ProductList() {
          
         
       
-
-      <nav className="d-flex justify-content-center mt-5">
-        <ul className="pagination">
-          <li className="page-item active">
-            <a className="page-link" href="#">
-              1
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              2
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              3
-            </a>
-          </li>
-        </ul>
-      </nav>
+    <Paginate links={data.meta.links}/>
+      
     </>
   );
 }

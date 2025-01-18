@@ -1,10 +1,16 @@
 import CategoriesList from "@/components/menu/CategoriesList";
+import Loading from "@/components/menu/Loading";
 import ProductList from "@/components/menu/ProductList";
 import { getFetch } from "@/utils/fetch"
+import { Suspense } from "react";
 
 
-export default async function MenuPage() {
+export default async function MenuPage({searchParams}) {
 const categories = await  getFetch('/categories')
+
+const params = new URLSearchParams(searchParams)
+// console.log(params.toString());
+
 
 
 
@@ -56,7 +62,9 @@ const categories = await  getFetch('/categories')
                 </div>
 
                 <div className="col-sm-12 col-lg-9">
-                  <ProductList/>
+                    <Suspense key={params.toString()} fallback={<Loading />}>
+                  <ProductList params={params.toString()}/>
+                  </Suspense>
                 </div>
             </div>
         </div>
