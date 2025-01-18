@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import { ToastContainer } from "react-toastify";
 import Footer from "@/components/layout/Footer";
-import NextNprogress from "@/components/libraries/nextNprogress";
+import NextNprogress from "@/components/libraries/NextNprogress";
 
 
 
