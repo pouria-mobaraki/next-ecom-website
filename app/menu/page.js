@@ -2,6 +2,7 @@ import CategoriesList from "@/components/menu/CategoriesList";
 import Loading from "@/components/menu/Loading";
 import ProductList from "@/components/menu/ProductList";
 import Search from "@/components/menu/Search";
+import Sort from "@/components/menu/Sort";
 import { getFetch } from "@/utils/fetch"
 import { Suspense } from "react";
 
@@ -26,33 +27,8 @@ const params = new URLSearchParams(searchParams)
 
                     <CategoriesList categories={categories}/>
                     <hr />
-                    <div>
-                        <label className="form-label">مرتب سازی</label>
-                        <div className="form-check my-2">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" />
-                            <label className="form-check-label cursor-pointer">
-                                بیشترین قیمت
-                            </label>
-                        </div>
-                        <div className="form-check my-2">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" />
-                            <label className="form-check-label cursor-pointer">
-                                کمترین قیمت
-                            </label>
-                        </div>
-                        <div className="form-check my-2">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" />
-                            <label className="form-check-label cursor-pointer">
-                                پرفروش ترین
-                            </label>
-                        </div>
-                        <div className="form-check my-2">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" />
-                            <label className="form-check-label cursor-pointer">
-                                با تخفیف
-                            </label>
-                        </div>
-                    </div>
+
+                    <Sort/>
 
                 </div>
 
