@@ -1,21 +1,22 @@
 'use client'
 
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function Paginate({links}) {
     const pathName = usePathname()
-
     const router = useRouter()
+
+    const searchParams = useSearchParams() 
+    // برای اینکه سرچ پارام های قبلی هم داشتع باشیم از این هوک استفاده میکنیم و داخل 
+    // urlsearchparams
+    // قرار میدیم
 
     const handlePage = (page)=> {
         console.log(page,pathName,router);
-        // console.log(`${pathName}?page=${page}`);
 
-        const params = new URLSearchParams()
+        const params = new URLSearchParams(searchParams)
         params.set('page', page)
-        // console.log(params.toString());
-        
         
         router.replace(`${pathName}?${params.toString()}`)
     }
