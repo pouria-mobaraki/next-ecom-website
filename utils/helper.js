@@ -14,4 +14,10 @@ const handleError = (message) => {
     return message
 }
 
-export {handleError}
+const salePercent = (price,salePrice)=> {
+return Math.round(((price-salePrice)/price)* 100)
+
+
+}
+
+export {handleError,salePercent}

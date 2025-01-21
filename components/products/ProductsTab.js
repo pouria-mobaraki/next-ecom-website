@@ -6,6 +6,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 
 function ProductsTab({ tabList, tabPanel }) {
+  
   return (
     <>
       <section className="food_section layout_padding-bottom">
