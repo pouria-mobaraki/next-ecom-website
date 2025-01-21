@@ -1,13 +1,11 @@
+import Product from "@/components/products/Product";
 import { getFetch } from "@/utils/fetch";
 import { salePercent } from "@/utils/helper";
 import Image from "next/image";
 
 export default async function ProductPage({ params }) {
-  console.log(decodeURI(params.slug));
-  console.log(params);
-
   const product = await getFetch(`/products/${params.slug}`);
-  console.log(product);
+  const randomProduct = await getFetch("/random-products?count=4");
 
   return (
     <div>
@@ -61,10 +59,10 @@ export default async function ProductPage({ params }) {
                       ></button>
                       {product.images.map((img, index) => (
                         <button
-                        key={index}
+                          key={index}
                           type="button"
                           data-bs-target="#carouselExampleIndicators"
-                          data-bs-slide-to={index+1}
+                          data-bs-slide-to={index + 1}
                         ></button>
                       ))}
                     </div>
@@ -121,32 +119,11 @@ export default async function ProductPage({ params }) {
       <section className="food_section my-5">
         <div className="container">
           <div className="row gx-3">
-            <div className="col-sm-6 col-lg-3">
-              <div className="box">
-                <div>
-                  <div className="img-box">
-                    <img className="img-fluid" src="./images/b1.jpg" alt="" />
-                  </div>
-                  <div className="detail-box">
-                    <h5>لورم ایپسوم متن</h5>
-                    <p>
-                      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ
-                      و با استفاده از طراحان گرافیک است.
-                    </p>
-                    <div className="options">
-                      <h6>
-                        <del>45,000</del>
-                        34,000
-                        <span>تومان</span>
-                      </h6>
-                      <a href="">
-                        <i className="bi bi-cart-fill text-white fs-5"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
+            {randomProduct.map((product, index) => (
+              <div key={index} className="col-sm-6 col-lg-3">
+                <Product product={product} />
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
