@@ -4,10 +4,10 @@ import { useFormState } from "react-dom"
 import { useEffect } from "react"
 import { toast } from "react-toastify"
 import SubmitButton from "@/components/SubmitButton"
-import { login } from "@/actions/auth"
+import { Login } from "@/actions/auth"
 
 export default function loginPage() {
-     const[stateLogin,formActionLogin] = useFormState(login,{})
+     const[stateLogin,formActionLogin] = useFormState(Login,{})
     
         useEffect(()=>{
         if(stateLogin?.status==='error'){

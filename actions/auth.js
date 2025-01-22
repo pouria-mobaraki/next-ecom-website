@@ -2,9 +2,10 @@
 
 import { postFetch } from "@/utils/fetch"
 import { handleError } from "@/utils/helper"
+import { cookies } from "next/headers"
 
 
-export async function login(stateLogin,formData) {
+export async function Login(stateLogin,formData) {
   const cellphone = formData.get('cellphone')
 
 
@@ -16,6 +17,7 @@ export async function login(stateLogin,formData) {
   }
 
   const pattern = /^(\+98|0)?9\d{9}$/;
+
   if(!pattern.test(cellphone)){
     return {
         status:'error',
@@ -23,17 +25,25 @@ export async function login(stateLogin,formData) {
     }
   }
 
-    // const data = await postFetch('/contact-us',{name,email,subject,text})
+    const data = await postFetch('/auth/login',{cellphone})
 
-    // if(data.status==='success'){
-    //     return {
-    //         status:data.status,
-    //         message:'پیام شما با موفقیت ثبت شد'
-    //     }
-    // }else {
-    //     return {
-    //         status:data.status,
-    //         message:handleError(data.message)
-    //     }
-    // }
+    if(data.status==='success'){
+        cookies().set({
+            name:'login_token',
+            value:data.data.login_token,
+            httpOnly:true,
+            path:'/',
+            maxAge:60*60*24*7
+
+        })
+        return {
+            status:data.status,
+            message:'کد تایید ارسال شد'
+        }
+    }else {
+        return {
+            status:data.status,
+            message:handleError(data.message)
+        }
+    }
 }
