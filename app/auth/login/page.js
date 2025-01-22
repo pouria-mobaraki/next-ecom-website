@@ -1,5 +1,5 @@
 'use client'
-import LoginForm from "@/components/auth/loginForm"
+import LoginForm from "@/components/auth/LoginForm"
 import CheckOtpForm from "@/components/auth/CheckOtpForm"
 import { useState } from "react"
 

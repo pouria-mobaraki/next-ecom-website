@@ -68,13 +68,23 @@ export async function CheckOtp(stateOtp,formData) {
           message:'کد ورود معتبر نیست '
       }
     }
+
+       const loginToken =cookies().get('login_token')
+
+       if(!loginToken){
+        return{
+            status: 'error',
+            message:'توکن ورودی شما معتبر نیست'
+        }
+       }
   
-      const data = await postFetch('/auth/login',{cellphone})
+      const data = await postFetch('/auth/check-otp',{otp,login_token:loginToken.value})
   
       if(data.status==='success'){
+        cookies().delete('login_token')
           cookies().set({
-              name:'login_token',
-              value:data.data.login_token,
+              name:'token',
+              value:data.data.token,
               httpOnly:true,
               path:'/',
               maxAge:60*60*24*7
@@ -82,7 +92,8 @@ export async function CheckOtp(stateOtp,formData) {
           })
           return {
               status:data.status,
-              message:'کد تایید ارسال شد'
+              message:'شما با موفقیت وارد شدید',
+              user:data.data.user
           }
       }else {
           return {
