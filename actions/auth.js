@@ -47,3 +47,47 @@ export async function Login(stateLogin,formData) {
         }
     }
 }
+
+
+export async function CheckOtp(stateOtp,formData) {
+    const otp = formData.get('otp')
+  
+  
+    if(otp===''){
+      return {
+          status:'error',
+          message:'کد ورودالزامی است'
+      }
+    }
+  
+    const pattern = /^[0-9]{6}$/;
+  
+    if(!pattern.test(otp)){
+      return {
+          status:'error',
+          message:'کد ورود معتبر نیست '
+      }
+    }
+  
+      const data = await postFetch('/auth/login',{cellphone})
+  
+      if(data.status==='success'){
+          cookies().set({
+              name:'login_token',
+              value:data.data.login_token,
+              httpOnly:true,
+              path:'/',
+              maxAge:60*60*24*7
+  
+          })
+          return {
+              status:data.status,
+              message:'کد تایید ارسال شد'
+          }
+      }else {
+          return {
+              status:data.status,
+              message:handleError(data.message)
+          }
+      }
+  }

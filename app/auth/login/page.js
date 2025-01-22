@@ -1,21 +1,12 @@
 'use client'
-
-import { useFormState } from "react-dom"
-import { useEffect } from "react"
-import { toast } from "react-toastify"
-import SubmitButton from "@/components/SubmitButton"
-import { Login } from "@/actions/auth"
+import LoginForm from "@/components/auth/loginForm"
+import CheckOtpForm from "@/components/auth/CheckOtpForm"
+import { useState } from "react"
 
 export default function loginPage() {
-     const[stateLogin,formActionLogin] = useFormState(Login,{})
+
+const[step,setStep] = useState(1)
     
-        useEffect(()=>{
-        if(stateLogin?.status==='error'){
-            toast.error(stateLogin.message)
-        }else {
-            toast.success(stateLogin.message)
-        }
-        },[stateLogin])
   return (
     <div>
          <section className="auth_section book_section">
@@ -48,18 +39,14 @@ export default function loginPage() {
                     {/* <hr /> */}
 
                     <div className="card">
-                        <div className="card-body">
-                            <div className="form_container">
-                                <form action={formActionLogin}>
-                                    <div className="mb-3">
-                                        <label className="form-label">شماره موبایل</label>
-                                        <input name="cellphone" type="text" className="form-control" />
-                                    </div>
-                                    <SubmitButton title='ورود' style='btn btn-primary btn-auth'/>
-                                
-                                </form>
-                            </div>
-                        </div>
+
+                        {/* <LoginForm/> */}
+                       {step == 1 && <LoginForm setStep={setStep}/>}
+                      
+                       {step == 2 && <CheckOtpForm/>}
+
+                       
+
                     </div>
                 </div>
             </div>
