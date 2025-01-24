@@ -1,19 +1,25 @@
 'use client'
 
 import { useFormState } from "react-dom"
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { toast } from "react-toastify"
 import SubmitButton from "@/components/SubmitButton"
 import { CheckOtp } from "@/actions/auth"
+import AuthContext from "@/context/AuthContext"
 
 export default function CheckOtpForm() {
       const[stateOtp,formActionOtp] = useFormState(CheckOtp,{})
+       const {loginContext}= useContext(AuthContext)
         
         useEffect(()=>{
         if(stateOtp?.status==='error'){
             toast.error(stateOtp.message)
         }else {
             toast.success(stateOtp.message)
+        }
+
+        if(stateOtp?.status === 'success'){
+          loginContext(stateOtp.user)
         }
         },[stateOtp])
   return (
