@@ -6,10 +6,13 @@ import { toast } from "react-toastify"
 import SubmitButton from "@/components/SubmitButton"
 import { CheckOtp } from "@/actions/auth"
 import AuthContext from "@/context/AuthContext"
+import ResendOtpButton from "./ResendOtpButton"
+import { useRouter } from "next/navigation"
 
 export default function CheckOtpForm() {
       const[stateOtp,formActionOtp] = useFormState(CheckOtp,{})
        const {loginContext}= useContext(AuthContext)
+       const router = useRouter()
         
         useEffect(()=>{
         if(stateOtp?.status==='error'){
@@ -20,6 +23,7 @@ export default function CheckOtpForm() {
 
         if(stateOtp?.status === 'success'){
           loginContext(stateOtp.user)
+           router.push('/')
         }
         },[stateOtp])
   return (
@@ -33,6 +37,9 @@ export default function CheckOtpForm() {
             </div>
             <SubmitButton title="تایید" style="btn btn-primary btn-auth" />
           </form>
+
+          <ResendOtpButton/>
+
         </div>
       </div>
     </div>
