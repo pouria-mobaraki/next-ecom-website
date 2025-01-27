@@ -1,21 +1,29 @@
 'use client';
-
+import { createAddress } from "@/actions/profile"
+import SubmitButton from "@/components/SubmitButton"
+import { useEffect } from "react"
+import { useFormState } from "react-dom"
+import { toast } from "react-toastify"
 import { useState } from "react";
 
 export default function CreateFormAddresses({ data }) {
   const [filterCities, setFilterCities] = useState([]);
-//   const [selectedProvince, setSelectedProvince] = useState(""); // مقدار اولیه خالی برای استان
 
   const changeProvince = (e) => {
     const provinceId = e.target.value;
-    // setSelectedProvince(provinceId); // مقدار انتخابی استان را تنظیم کنید
-
-    // فیلتر کردن شهرها براساس province_id
     const selectedCity = data.cities.filter(city => city.province_id == provinceId);
     setFilterCities(selectedCity);
-    // console.log(filterCities);
-    
   };
+
+  const [stateCreate,formActionCreate] = useFormState(createAddress,{})
+      useEffect(()=>{
+         if(stateCreate?.status==='error'){
+               toast.error(stateCreate.message)
+           }else {
+               toast.success(stateCreate.message)
+           }
+          
+      },[stateCreate])
 
   return (
     <>
@@ -27,27 +35,28 @@ export default function CreateFormAddresses({ data }) {
       >
         ایجاد آدرس جدید
       </button>
-      <div className="collapse mt-3" id="collapseExample">
+      <form action={formActionCreate} className="collapse mt-3" id="collapseExample">
         <div className="card card-body">
           <div className="row g-4">
             <div className="col col-md-6">
               <label className="form-label">عنوان</label>
-              <input type="text" className="form-control" />
+              <input name="title" type="text" className="form-control" />
             </div>
             <div className="col col-md-6">
               <label className="form-label">شماره تماس</label>
-              <input type="text" className="form-control" />
+              <input name="cellphone" type="text" className="form-control" />
             </div>
             <div className="col col-md-6">
               <label className="form-label">کد پستی</label>
-              <input type="text" className="form-control" />
+              <input name="postal_code" type="text" className="form-control" />
             </div>
             <div className="col col-md-6">
               <label className="form-label">استان</label>
               <select
+              name="province_id"
                 className="form-select"
                 onChange={changeProvince}
-                value='' // مقدار کنترل شده برای استان
+                defaultValue='' // مقدار کنترل شده برای استان
               >
                 <option value="" disabled>
                   -- انتخاب استان --
@@ -61,7 +70,7 @@ export default function CreateFormAddresses({ data }) {
             </div>
             <div className="col col-md-6">
               <label className="form-label">شهر</label>
-              <select className="form-select" value=''>
+              <select name="city_id" className="form-select" defaultValue=''>
                 <option value="" disabled>
                   -- انتخاب شهر --
                 </option>
@@ -75,6 +84,7 @@ export default function CreateFormAddresses({ data }) {
             <div className="col col-md-12">
               <label className="form-label">آدرس</label>
               <textarea
+              name="address"
                 type="text"
                 rows="5"
                 className="form-control"
@@ -82,10 +92,10 @@ export default function CreateFormAddresses({ data }) {
             </div>
           </div>
           <div>
-            <button className="btn btn-primary mt-4">ایجاد</button>
+            <SubmitButton title='ایجاد' style="btn btn-primary mt-4"/>
           </div>
         </div>
-      </div>
+      </form>
     </>
   );
 }
