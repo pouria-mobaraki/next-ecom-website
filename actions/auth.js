@@ -162,4 +162,21 @@ export async function CheckOtp(stateOtp,formData) {
       }
   }
 
+
+  export async function logOut() {
+    const token = cookies().get('token')
+      const data = await postFetch('/auth/logout',{},{'Authorization':`Bearer ${token.value}`})
+  
+      if(data.status==='success'){
+        cookies().delete('token')
+          return {
+            success:'you are logout'
+          }
+      }else {
+          return {
+              error:'User Forbiden'
+          }
+      }
+  }
+
   

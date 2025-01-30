@@ -13,6 +13,11 @@ export const AuthProvider = ({ children }) => {
       console.log(user);
   }
 
+  const logOutContext = () => {
+    setUser(null)
+    console.log(user);
+}
+
   useEffect(()=>{
     const checkLoginUser = async ()=> {
         const data = await me()
@@ -29,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 
 
 
-  return ( <AuthContext.Provider value={{user,loginContext}}>
+  return ( <AuthContext.Provider value={{user,loginContext,logOutContext}}>
               {children}
             </AuthContext.Provider>
   )

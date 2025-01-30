@@ -1,4 +1,4 @@
-import Table from "@/components/profile/orders/Table";
+import Table from "@/components/profile/transactions/Table";
 
 
 export default function page({searchParams}) {
