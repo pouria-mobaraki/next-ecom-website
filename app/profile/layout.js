@@ -7,7 +7,7 @@ import { useContext } from "react";
 
 
 export default function layout({children}) {
-   const {logoutContext}= useContext(AuthContext)
+   const {logOutContext}= useContext(AuthContext)
    const router = useRouter()
   return (
     <div>
