@@ -32,7 +32,7 @@ export default function layout({children}) {
                         <li className="list-group-item">
                             <a href="#" onClick={async ()=> {
                                 await logOut()
-                                logoutContext()
+                                logOutContext()
                                 router.push('/')
                             }}> خروج</a>
                         </li>
