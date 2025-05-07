@@ -16,7 +16,7 @@ const Map = dynamic(()=>
         <div className="container">
             <div className="heading_container">
                 <h2>
-                    تماس با ما
+                    ارتباط با ما
                 </h2>
             </div>
             <div className="row">
